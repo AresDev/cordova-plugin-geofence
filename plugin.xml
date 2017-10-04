@@ -17,6 +17,7 @@
 
     <js-module src="www/geofence.js" name="geofence">
         <clobbers target="cordova.plugins.geofence" />
+        <clobbers target="geofence" />
     </js-module>
 
     <dependency id="cordova-plugin-add-swift-support" version="1.6.0" />

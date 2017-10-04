@@ -114,20 +114,20 @@ If you are retargeting WP 8.0 to WP 8.1 you need to register background task to 
 
 # Using the plugin
 
-Cordova initialize plugin to `window.geofence` object.
+Cordova initialize plugin to `cordova.plugins.geofence` object.
 
 ## Methods
 
 All methods returning promises, but you can also use standard callback functions.
 
-- `window.geofence.initialize(onSuccess, onError)`
-- `window.geofence.addOrUpdate(geofences, onSuccess, onError)`
-- `window.geofence.remove(geofenceId, onSuccess, onError)`
-- `window.geofence.removeAll(onSuccess, onError)`
-- `window.geofence.getWatched(onSuccess, onError)`
+- `cordova.plugins.geofence.initialize(onSuccess, onError)`
+- `cordova.plugins.geofence.addOrUpdate(geofences, onSuccess, onError)`
+- `cordova.plugins.geofence.remove(geofenceId, onSuccess, onError)`
+- `cordova.plugins.geofence.removeAll(onSuccess, onError)`
+- `cordova.plugins.geofence.getWatched(onSuccess, onError)`
 
 For listening of geofence transistion you can override onTransitionReceived method
-- `window.geofence.onTransitionReceived(geofences)`
+- `cordova.plugins.geofence.onTransitionReceived(geofences)`
 
 ## Constants
 
@@ -159,8 +159,8 @@ The plugin is not available until `deviceready` event is fired.
 
 ```javascript
 document.addEventListener('deviceready', function () {
-    // window.geofence is now available
-    window.geofence.initialize().then(function () {
+    // cordova.plugins.geofence is now available
+    cordova.plugins.geofence.initialize().then(function () {
         console.log("Successful initialization");
     }, function (error) {
         console.log("Error", error);
@@ -174,7 +174,7 @@ If required permissions are not granted then initialization fails with error mes
 ## Adding new geofence to monitor
 
 ```javascript
-window.geofence.addOrUpdate({
+cordova.plugins.geofence.addOrUpdate({
     id:             String, //A unique identifier of geofence
     latitude:       Number, //Geo latitude of geofence
     longitude:      Number, //Geo longitude of geofence
@@ -198,7 +198,7 @@ window.geofence.addOrUpdate({
 ```
 Adding more geofences at once
 ```javascript
-window.geofence.addOrUpdate([geofence1, geofence2, geofence3]);
+cordova.plugins.geofence.addOrUpdate([geofence1, geofence2, geofence3]);
 ```
 
 Geofence overrides the previously one with the same `id`.
@@ -266,7 +266,7 @@ Works only on Android platform so far.
 
 Removing single geofence
 ```javascript
-window.geofence.remove(geofenceId)
+cordova.plugins.geofence.remove(geofenceId)
     .then(function () {
         console.log('Geofence sucessfully removed');
     }
@@ -276,13 +276,13 @@ window.geofence.remove(geofenceId)
 ```
 Removing more than one geofence at once.
 ```javascript
-window.geofence.remove([geofenceId1, geofenceId2, geofenceId3]);
+cordova.plugins.geofence.remove([geofenceId1, geofenceId2, geofenceId3]);
 ```
 
 ## Removing all geofences
 
 ```javascript
-window.geofence.removeAll()
+cordova.plugins.geofence.removeAll()
     .then(function () {
         console.log('All geofences successfully removed.');
     }
@@ -294,7 +294,7 @@ window.geofence.removeAll()
 ## Getting watched geofences from device
 
 ```javascript
-window.geofence.getWatched().then(function (geofencesJson) {
+cordova.plugins.geofence.getWatched().then(function (geofencesJson) {
     var geofences = JSON.parse(geofencesJson);
 });
 ```
@@ -302,7 +302,7 @@ window.geofence.getWatched().then(function (geofencesJson) {
 ## Listening for geofence transitions
 
 ```javascript
-window.geofence.onTransitionReceived = function (geofences) {
+cordova.plugins.geofence.onTransitionReceived = function (geofences) {
     geofences.forEach(function (geo) {
         console.log('Geofence transition detected', geo);
     });
@@ -355,7 +355,7 @@ public class TransitionReceiver extends BroadcastReceiver {
 Android, iOS only
 
 ```javascript
-window.geofence.onNotificationClicked = function (notificationData) {
+cordova.plugins.geofence.onNotificationClicked = function (notificationData) {
     console.log('App opened from Geo Notification!', notificationData);
 };
 ```
@@ -365,7 +365,7 @@ window.geofence.onNotificationClicked = function (notificationData) {
 Adding geofence to monitor entering Gliwice city center area of radius 3km
 
 ```javascript
-window.geofence.addOrUpdate({
+cordova.plugins.geofence.addOrUpdate({
     id:             "69ca1b88-6fbe-4e80-a4d4-ff4d3748acdb",
     latitude:       50.2980049,
     longitude:      18.6593152,
